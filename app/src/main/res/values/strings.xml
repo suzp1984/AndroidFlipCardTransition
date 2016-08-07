@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FlipCardTransition</string>
+    <string name="flip_card">Flip Card</string>
 </resources>
