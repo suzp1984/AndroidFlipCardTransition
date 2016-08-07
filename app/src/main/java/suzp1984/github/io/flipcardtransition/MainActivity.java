@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import suzp1984.github.io.flipcardtransition.transition.CardFlipTransition;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        // setupCardFlipTransition();
-        setupSlideTransition();
+        setupCardFlipTransition();
+        // setupSlideTransition();
     }
 
     @Override
@@ -46,8 +47,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupCardFlipTransition() {
+        CardFlipTransition flip = new CardFlipTransition();
+        flip.setDuration(500);
+        flip.addTarget(mTextCard);
+        flip.excludeTarget(android.R.id.navigationBarBackground, true);
+        flip.excludeTarget(android.R.id.statusBarBackground, true);
 
+        getWindow().setExitTransition(flip);
 
+        getWindow().setEnterTransition(flip);
+        getWindow().setReenterTransition(flip);
+
+        getWindow().setEnterTransition(flip);
     }
 
     private void setupSlideTransition() {
