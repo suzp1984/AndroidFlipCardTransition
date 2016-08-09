@@ -14,7 +14,7 @@
         android:gravity="center"
         android:transitionName="card"
         card_view:cardBackgroundColor="@color/colorAccent"
-        card_view:cardElevation="10dp"
+        card_view:cardElevation="0dp"
         card_view:cardCornerRadius="20dp" />
 
 </RelativeLayout>
