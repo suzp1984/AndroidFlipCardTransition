@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @OnClick(R.id.text_card)
+    @OnClick(R.id.clickme)
     public void clickCard() {
         Log.d(TAG, "on Click text_card");
         Intent intent = new Intent(this, BigCardActivity.class);
