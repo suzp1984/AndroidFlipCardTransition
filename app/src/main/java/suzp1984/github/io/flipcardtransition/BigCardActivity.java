@@ -2,6 +2,7 @@ package suzp1984.github.io.flipcardtransition;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -16,13 +17,13 @@ public class BigCardActivity extends AppCompatActivity {
     private static final String TAG = "BigCardActivity";
 
     @BindView(R.id.big_card)
-    TextView mCardView;
+    CardView mCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_card);
-
+        setTitle("Big Card");
         ButterKnife.bind(this);
 
         setupCardFlipTransition();

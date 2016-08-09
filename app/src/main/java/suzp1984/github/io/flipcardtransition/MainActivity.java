@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,12 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.text_card)
-    TextView mTextCard;
+    CardView mTextCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Small Card");
 
         ButterKnife.bind(this);
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.text_card)
     public void clickCard() {
-        Log.e(TAG, "on Click text_card");
+        Log.d(TAG, "on Click text_card");
         Intent intent = new Intent(this, BigCardActivity.class);
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
