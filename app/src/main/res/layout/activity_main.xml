@@ -22,5 +22,15 @@
         android:background="@drawable/btn_background"
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_below="@id/windows_transition_btn"
+        android:layout_marginTop="20dp"
+        android:text="FlipCard Views Sample"
+        android:background="@drawable/btn_background"/>
+
 
 </RelativeLayout>

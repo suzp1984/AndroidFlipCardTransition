@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.transition.Slide;
+import android.transition.Visibility;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +32,13 @@ public class FlipCardTransitionActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupCardFlipTransition();
+        // setupSlideTransition();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        // super.onActivityResult(requestCode, resultCode, intent);
+        Log.d(TAG, "onActivityResult: " + requestCode + ", " + resultCode);
     }
 
     @OnClick(R.id.clickme)
@@ -39,22 +48,29 @@ public class FlipCardTransitionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BigCardActivity.class);
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
-        startActivity(intent, options.toBundle());
+        // startActivity(intent, options.toBundle());
+        startActivityForResult(intent, 10, options.toBundle());
     }
 
     private void setupCardFlipTransition() {
-        CardFlipTransition flip = new CardFlipTransition();
-        flip.setDuration(500);
-        flip.addTarget(mTextCard);
-        flip.excludeTarget(android.R.id.navigationBarBackground, true);
-        flip.excludeTarget(android.R.id.statusBarBackground, true);
+        CardFlipTransition flipOut = new CardFlipTransition();
+        flipOut.setDuration(500);
+        flipOut.setMode(Visibility.MODE_OUT);
+        flipOut.addTarget(R.id.text_card);
+        flipOut.excludeTarget(android.R.id.navigationBarBackground, true);
+        flipOut.excludeTarget(android.R.id.statusBarBackground, true);
 
-        getWindow().setExitTransition(flip);
+        getWindow().setExitTransition(flipOut);
 
-        getWindow().setEnterTransition(flip);
-        getWindow().setReenterTransition(flip);
+        CardFlipTransition flipIn = new CardFlipTransition();
+        flipIn.setDuration(500);
+        flipIn.setMode(Visibility.MODE_IN);
+        flipIn.addTarget(R.id.text_card);
+        flipIn.excludeTarget(android.R.id.navigationBarBackground, true);
+        flipIn.excludeTarget(android.R.id.statusBarBackground, true);
 
-        getWindow().setEnterTransition(flip);
+        getWindow().setEnterTransition(flipIn);
+
     }
 
     private void setupSlideTransition() {
@@ -67,7 +83,8 @@ public class FlipCardTransitionActivity extends AppCompatActivity {
         slideEnter.excludeTarget(android.R.id.statusBarBackground, true);
 
         getWindow().setEnterTransition(slideEnter);
-        getWindow().setReenterTransition(slideEnter);
+        // Tips: Cann't set same Transition object to more than one Transition callbacks.
+        // getWindow().setReenterTransition(slideEnter);
 
         Slide slideOut = new Slide();
         slideOut.addTarget(R.id.text_card);

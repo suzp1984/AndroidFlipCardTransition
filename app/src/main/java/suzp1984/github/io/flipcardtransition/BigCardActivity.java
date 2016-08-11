@@ -4,8 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.transition.Slide;
+import android.transition.Visibility;
+import android.util.Log;
 import android.view.Gravity;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,22 +33,31 @@ public class BigCardActivity extends AppCompatActivity {
 
     @OnClick(R.id.big_card)
     public void clickCard() {
+        Log.d(TAG, "clicked big card");
+        setResult(RESULT_OK);
         finishAfterTransition();
+        // finish();
+        // finishActivity(10);
     }
 
     private void setupCardFlipTransition() {
-        CardFlipTransition flip = new CardFlipTransition();
-        flip.setDuration(500);
-        flip.addTarget(mCardView);
-        flip.excludeTarget(android.R.id.navigationBarBackground, true);
-        flip.excludeTarget(android.R.id.statusBarBackground, true);
+        CardFlipTransition flipIn = new CardFlipTransition();
+        flipIn.setDuration(500);
+        flipIn.setMode(Visibility.MODE_IN);
+        flipIn.addTarget(R.id.big_card);
+        flipIn.excludeTarget(android.R.id.navigationBarBackground, true);
+        flipIn.excludeTarget(android.R.id.statusBarBackground, true);
 
-        getWindow().setExitTransition(flip);
+        getWindow().setEnterTransition(flipIn);
 
-        getWindow().setEnterTransition(flip);
-        getWindow().setReenterTransition(flip);
+        CardFlipTransition flipOut = new CardFlipTransition();
+        flipOut.setMode(Visibility.MODE_OUT);
+        flipOut.setDuration(500);
+        flipOut.addTarget(R.id.big_card);
+        flipOut.excludeTarget(android.R.id.navigationBarBackground, true);
+        flipOut.excludeTarget(android.R.id.statusBarBackground, true);
 
-        getWindow().setEnterTransition(flip);
+        getWindow().setExitTransition(flipOut);
     }
 
     private void setupSlideTransition() {
